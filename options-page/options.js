@@ -9,7 +9,23 @@ function getBlockedSites() {
         });
     });
 }
+// NEXT USE THIS ALARMINFO TO SHOW IN THE TEXTFIELDS --- DELETE THIS
+function getAlarmInfo(){
+    return new Promise(resolve =>{
+        chrome.runtime.sendMessage({"requestMessage":"getAlarmInfo"}, response =>{
+            resolve(response.alarmInfo);
+        });
+    });
+}
 
+// Loads alarm-info into textfields
+function loadAlarmInfo(){
+    getAlarmInfo().then(alarmInfo => {
+        document.getElementById("session-time").value = alarmInfo.sessionTimeInMinutes;
+    });
+}
+
+// Creates list of users blocked sites
 function loadBlockedSites() {
     getBlockedSites().then(sites => {
         _blockedSites = sites;
@@ -44,4 +60,6 @@ function deleteURL(rowNumber) {
         loadBlockedSites();
     });
 }
+
 loadBlockedSites();
+loadAlarmInfo();

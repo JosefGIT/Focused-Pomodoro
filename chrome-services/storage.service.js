@@ -78,6 +78,39 @@ function getBreakAlarmInfo() {
     });
 }
 
+// Used for getting values to options page
+function getBreakAlarmInfo() {
+    return new Promise(resolve => {
+        chrome.storage.sync.get({
+            "shortBreakTimeInMinutes": 0.2,
+            "longBreakTimeInMinutes": 0.4,
+            "sessionsBeforeLongBreak": 4,
+            "sessionTimeInMinutes": 0.4,
+            "timeBeforeResetInMinutes": 0.2
+        }, items => {
+            resolve({
+                "shortBreakTimeInMinutes": items.shortBreakTimeInMinutes,
+                "longBreakTimeInMinutes": items.longBreakTimeInMinutes,
+                "sessionsBeforeLongBreak": items.sessionsBeforeLongBreak,
+                "sessionTimeInMinutes": items.sessionTimeInMinutes,
+                "timeBeforeResetInMinutes": items.timeBeforeResetInMinutes
+            });
+        });
+    });
+}
+
+function updateAlarmInfo(newAlarmInfo){
+    return new Promise(resolve => {
+        chrome.storage.sync.set({
+            "shortBreakTimeInMinutes": newAlarmInfo.shortBreakTimeInMinutes,
+            "longBreakTimeInMinutes": newAlarmInfo.longBreakTimeInMinutes,
+            "sessionsBeforeLongBreak": newAlarmInfo.sessionsBeforeLongBreak,
+            "sessionTimeInMinutes": newAlarmInfo.sessionTimeInMinutes,
+            "timeBeforeResetInMinutes": newAlarmInfo.timeBeforeResetInMinutes
+        },() => resolve());
+    })
+}
+
 function incrementCurrentSessionNumber() {
     getBreakAlarmInfo().then(alarmInfo => {
         //var incrementedNumber = parseInt(alarmInfo.currentSessionNumber)+1;

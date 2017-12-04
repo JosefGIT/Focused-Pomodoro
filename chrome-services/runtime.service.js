@@ -17,6 +17,11 @@ chrome.runtime.onMessage.addListener(
                     sendResponse({ "blockedSites": blockedSites });
                 });
                 break;
+            case "getAlarmInfo":
+                getBreakAlarmInfo().then(alarmInfo =>{
+                    sendResponse({"alarmInfo" : alarmInfo});
+                });
+            break;
         }
 
         // Return true to "sendResponse" asynchronously
