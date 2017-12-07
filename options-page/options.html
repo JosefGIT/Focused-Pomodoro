@@ -8,29 +8,30 @@
 </head>
 
 <body>
-    <input id="inputId" type="text" />
-    <button id="blocksitebtn">Block site</button>
-    <button id="clearbtn">DELETE ERR'THING!</button>
-    <button id="showall">Click to show all!</button>
     <table id="table.blockedSites">
         <tr>
             <th>Blocked URL</th>
             <th>DELETE</th>
         </tr>
     </table>
-    <table>
+    <table id="alarm-info-table">
+        <tr><td><b>Session time</b></td></tr>
         <tr>
             <td><input type="text" id="session-time" class="alarm-info-textfield"/></td>
         </tr>
+        <tr><td><b>Short break</b></td></tr>
         <tr>
-            <td><input type="text" id="short-break-time" class="alarm-info-textfield"/></td>
+            <td><input type="text" id="session-break-time" class="alarm-info-textfield"/></td>
         </tr>
+        <tr><td><b>Long break</b></td></tr>
         <tr>
             <td><input type="text" id="long-break-time" class="alarm-info-textfield"/></td>
         </tr>
+        <tr><td><b>Sessions before long break</b></td></tr>
         <tr>
             <td><input type="text" id="sessions-before-long-break" class="alarm-info-textfield"/></td>
         </tr>
+        <tr><td><b>Inactive time before timer reset</b></td></tr>
         <tr>
             <td><input type="text" id="time-before-reset" class="alarm-info-textfield"/></td>
         </tr>

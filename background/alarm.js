@@ -1,21 +1,5 @@
-/*function setBadgeText() {
-    switch (alarmState) {
-        case NO_STATE:
-            break;
-        case START_SESSION_NEXT:
-            chrome.browserAction.setBadgeText({ "text": "ses" });
-            break;
-        case START_SHORT_BREAK_NEXT:
-            chrome.browserAction.setBadgeText({ "text": "short" });
-            break;
-        case START_LONG_BREAK_NEXT:
-            chrome.browserAction.setBadgeText({ "text": "ses" });
-            break;
-    }
-}
-*/
-var _green = [34, 139, 34, 255];
-var _red = [200, 0, 0, 255];
+const GREEN = [34, 139, 34, 255];
+const RED = [200, 0, 0, 255];
 
 chrome.browserAction.onClicked.addListener(() => {
     startNextAlarm();
@@ -23,7 +7,7 @@ chrome.browserAction.onClicked.addListener(() => {
 
 function startNextAlarm() {
     switch (_alarmState) {
-        case NO_STATE:
+        case NO_STATE: // If NO_STATE or START_SESSION_NEXT run startSessionAlarm().
         case START_SESSION_NEXT:
             startSessionAlarm();
             break;
@@ -38,8 +22,8 @@ function startNextAlarm() {
 
 var _badgeTimer;
 var _noActivityTimer;
-const NO_ACTIVITY_BEFORE_RESET_IN_MS = 1 * 10 * 1000;
-const REPEAT_TIMER_TIME_IN_MS = 10 * 1000;
+const NO_ACTIVITY_BEFORE_RESET_IN_MS = 10000;
+const REPEAT_TIMER_TIME_IN_MS = 10000;
 
 function activateTimer() {
     clearInterval(_noActivityTimer);
@@ -80,13 +64,13 @@ function badgeBackgroundColor() {
     switch (_alarmState) {
         case NO_STATE:
         case START_SESSION_NEXT:
-            setBadgeBackgroundColor(_red);
+            setBadgeBackgroundColor(RED);
             break;
         case START_SHORT_BREAK_NEXT:
-            setBadgeBackgroundColor(_green);
+            setBadgeBackgroundColor(GREEN);
             break;
         case START_LONG_BREAK_NEXT:
-            setBadgeBackgroundColor(_green);
+            setBadgeBackgroundColor(GREEN);
             break;
     }
 }

@@ -8,22 +8,19 @@ function createChromeAlarm(alarmName, delayInMinutes, alarmState) {
     _alarmState = alarmState;
 }
 function startSessionAlarm() {
-    getSessionAlarmInfo().then(alarmInfo => {
+    getBreakAlarmInfo().then(alarmInfo => {
         createChromeAlarm(sessionAlarmName, alarmInfo.sessionTimeInMinutes, SESSION_ALARM_IS_RUNNING);
         incrementCurrentSessionNumber();
     });
 }
 
-function stopSessionAlarm() {
-}
+
 function startShortBreakAlarm() {
     getBreakAlarmInfo().then(alarmInfo => {
         createChromeAlarm(shortBreakAlarmName, alarmInfo.shortBreakTimeInMinutes, BREAK_ALARM_IS_RUNNING);
     });
 }
 
-function stopShortBreakAlarm() {
-}
 
 function startLongBreakAlarm() {
     getBreakAlarmInfo().then(alarmInfo => {
@@ -63,7 +60,6 @@ function onAlarmListener() {
     chrome.alarms.onAlarm.addListener(alarmInfo => {
         switch (alarmInfo.name) {
             case sessionAlarmName:
-                stopSessionAlarm();
                 getBreakAlarmInfo().then(breakAlarmInfo => {
                     if (breakAlarmInfo.currentSessionNumber >= breakAlarmInfo.sessionsBeforeLongBreak)
                         _alarmState = START_LONG_BREAK_NEXT;
@@ -75,7 +71,6 @@ function onAlarmListener() {
                 break;
 
             case shortBreakAlarmName:
-                stopShortBreakAlarm();
                 _alarmState = START_SESSION_NEXT;
                 deactivateTimer();
                 break;

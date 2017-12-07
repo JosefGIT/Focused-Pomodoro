@@ -9,7 +9,7 @@ function getBlockedSites() {
         });
     });
 }
-// NEXT USE THIS ALARMINFO TO SHOW IN THE TEXTFIELDS --- DELETE THIS
+
 function getAlarmInfo(){
     return new Promise(resolve =>{
         chrome.runtime.sendMessage({"requestMessage":"getAlarmInfo"}, response =>{
@@ -22,6 +22,10 @@ function getAlarmInfo(){
 function loadAlarmInfo(){
     getAlarmInfo().then(alarmInfo => {
         document.getElementById("session-time").value = alarmInfo.sessionTimeInMinutes;
+        document.getElementById("session-break-time").value = alarmInfo.shortBreakTimeInMinutes;
+        document.getElementById("long-break-time").value = alarmInfo.longBreakTimeInMinutes
+        document.getElementById("sessions-before-long-break").value = alarmInfo.sessionsBeforeLongBreak
+        document.getElementById("time-before-reset").value = alarmInfo.timeBeforeResetInMinutes;
     });
 }
 

@@ -21,7 +21,7 @@ function blockSite(siteURL) {
                         console.info(siteURL + " is now blocked during pomodoro session!");
                     });
                 } else {
-                    console.error("Site URL is not a string!");
+                    console.error("Invalid URL");
                 }
             });
         }
@@ -48,18 +48,8 @@ function siteIsBlocked(siteURL) {
     });
 }
 
-function getSessionAlarmInfo() {
-    return new Promise(resolve => {
-        chrome.storage.sync.get({
-            "sessionTimeInMinutes": 0.4
-        }, items => {
-            resolve({
-                "sessionTimeInMinutes": items.sessionTimeInMinutes
-            });
-        });
-    });
-}
 
+/*
 function getBreakAlarmInfo() {
     return new Promise(resolve => {
         chrome.storage.sync.get({
@@ -77,7 +67,7 @@ function getBreakAlarmInfo() {
         });
     });
 }
-
+*/
 // Used for getting values to options page
 function getBreakAlarmInfo() {
     return new Promise(resolve => {
