@@ -22,6 +22,9 @@ chrome.runtime.onMessage.addListener(
                     sendResponse({"alarmInfo" : alarmInfo});
                 });
             break;
+            case "updateAlarmInfo":
+                updateAlarmInfo(request);
+            break;
         }
 
         // Return true to "sendResponse" asynchronously

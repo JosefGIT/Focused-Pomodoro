@@ -14,7 +14,8 @@
         "scripts":[
             "main.js",
             "background/alarm.js",
-            "background/context-menu/block-site.page.js"
+            "background/context-menu/block-site.page.js",
+            "background/context-menu/stop-alarm.browser_action.js"
         ]
     },
     "content_scripts":[{

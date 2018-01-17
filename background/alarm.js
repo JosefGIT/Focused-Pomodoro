@@ -47,6 +47,11 @@ function activateNoActivityTimer() {
 }
 
 function resetCycle() {
+    // Clears alarm and interval if they exists
+    // Currently does not check for existence since it does not cause any error for clearing non-existent alarms/intervals
+    chrome.alarms.clearAll();
+    clearInterval(_badgeTimer);
+
     resetSessionNumber();
     _alarmState = NO_STATE;
     chrome.browserAction.setBadgeText({ "text": "" });

@@ -115,16 +115,3 @@ function resetSessionNumber() {
         "currentSessionNumber": 0
     });
 }
-
-/*
-function getAlarmInfo(alarm){
-    return new Promise(resolve => {
-        chrome.storage.sync.get({
-            "sessionTimeInMinutes": 0.1
-        }, items => {
-            resolve({
-                "delayInMinutes": items.sessionTimeInMinutes
-            });
-        });
-    });
-}*/

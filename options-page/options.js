@@ -65,5 +65,25 @@ function deleteURL(rowNumber) {
     });
 }
 
+
+document.getElementById("ok-button").addEventListener("click", () => {
+    var sessionTime = parseInt(document.getElementById("session-time").value);
+    var sessionBreakTime = parseInt(document.getElementById("session-break-time").value);
+    var longBreakTime = parseInt(document.getElementById("long-break-time").value);
+    var sessionsBeforeLongBreak = parseInt(document.getElementById("sessions-before-long-break").value);
+    var timeBeforeReset = parseInt(document.getElementById("time-before-reset").value);
+    chrome.runtime.sendMessage({
+        "requestMessage": "updateAlarmInfo",
+        "sessionTimeInMinutes": sessionTime,
+        "shortBreakTimeInMinutes": sessionBreakTime,
+        "longBreakTimeInMinutes": longBreakTime,
+        "sessionsBeforeLongBreak": sessionsBeforeLongBreak,
+        "timeBeforeResetInMinutes": timeBeforeReset
+    },response => { 
+        console.log("Works?");
+    });
+});
+
+
 loadBlockedSites();
 loadAlarmInfo();
